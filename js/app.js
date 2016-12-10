@@ -38,17 +38,25 @@
 
 $(init);
 
+var currentWord          = [];
+var currentRandomNumbers = [];  // add a condition so that two random numbers are not the same
+
 function init() {
   parseBoard();
-  randomWord();
 }
 
+// Generates a new word every x seconds
+setInterval(randomWord, 1000);
+
+// Creates a board with list items which will be populated with random words later
 function parseBoard() {
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < 25; i++) {
     $('.board').append('<li></li>');
   }
+  $('form').on('submit', doesMatch);
 }
 
+// Generates a random word and parse it to unordered list
 function randomWord() {
   var requestStr = 'http://randomword.setgetgo.com/get.php';
   $.ajax({
@@ -59,39 +67,58 @@ function randomWord() {
   });
 }
 
+// Parse random word in a random list item and push it to currentWord array
 function parseWord(word) {
-  console.log(word.Word);
   var $lisArray = $('.board').children();
-  var randomNumber = (Math.floor(Math.random() * 19) + 1);
-  console.log($lisArray);
+  var randomNumber = (Math.floor(Math.random() * 24) + 1);
   $lisArray[randomNumber].append(word.Word);
+  wordMove($lisArray[randomNumber]);
+  currentWord.push(word.Word);
+}
+
+// Animates the word across board
+function wordMove(word) {
+  var $windowWidth = $(window).width() + 'px';
+  $(word).animate({
+    marginLeft: $windowWidth
+  }, 20000, function(){
+    console.log('GAME OVER - callback to go here');
+  });
+}
+
+// Check if the word submitted matched any word in a currentWord array
+function doesMatch(e) {
+  e.preventDefault();
+  var typed = $('input').val();
+  if ( currentWord.indexOf(typed) > -1 ) {
+    console.log('SUCCESS');
+    removeListItem();
+    $('input').val('');
+    doesMatch;
+  } else {
+    console.log('working?');
+    $('input').val('');
+  }
 }
 
 
+// Function that removes li after typed
+function removeListItem() {
+  var $input = $('input').val();
+  var index = currentWord.indexOf($input);
+  var $lisArray = $('.board').children();
+  console.log($lisArray);
 
-// function start() {
-//   // setInterval(function(){RandomWord();}, 2000);
-//   RandomWord();
-// }
-//
-// function RandomWord() {
-//   var requestStr = 'http://randomword.setgetgo.com/get.php';
-//
-//   $.ajax({
-//     type: 'GET',
-//     url: requestStr,
-//     dataType: 'jsonp',
-//     jsonpCallback: 'RandomWordComplete'
-//   });
-// }
-//
-// function RandomWordComplete(data) {
-//   var $board = $('.board');
-//
-//   console.log(data.Word);
-//   if (data.Word.length > 5) {
-//     $board.append(data.Word);
-//   } else {
-//     RandomWord();
-//   }
-// }
+  if (index > -1) {
+    currentWord.splice(index, 1);
+    console.log('deleting...');
+    $($lisArray).each(function(i, elem) {
+      console.log($(elem).text());
+      if ($(elem).text() === $input) {
+        $(elem).remove();
+        $('.board').append('<li></li>');
+      }
+    });
+  }
+  // add function to also remove random Number form currentRandomNumbers
+}
