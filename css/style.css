@@ -1,3 +1,11 @@
 body {
   background-color: lightyellow;
+  margin: 0;
+}
+
+ul {
+  width: 100%;
+  background: red;
+  padding: 0;
+  margin: 0;
 }
