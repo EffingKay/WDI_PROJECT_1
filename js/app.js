@@ -34,7 +34,7 @@ $(parseBoard);
 var currentWord = [];
 
 // Generates a new word every x seconds
-setInterval(randomWord, 1000);
+setInterval(randomWord, 2500);
 
 // Creates a board with list items which will be populated with random words later
 function parseBoard() {
@@ -59,10 +59,14 @@ function randomWord() {
 function parseWord(word) {
   var $lisArray = $('.board').children();
   var randomNumber = (Math.floor(Math.random() * 24) + 1);
-  $lisArray[randomNumber].append(word.Word);
-  wordMove($lisArray[randomNumber]);
-  currentWord.push(word.Word);
-}
+  if ($($lisArray[randomNumber]).html() === '') {
+    $lisArray[randomNumber].append(word.Word);
+    wordMove($lisArray[randomNumber]);
+    currentWord.push(word.Word);
+  }
+  console.log($($lisArray[randomNumber]).html());
+}   /// ADD A FUNCTION TO CHECK IF THE LI IS EMPTY
+
 
 // Animates the word across board
 function wordMove(word) {
@@ -103,5 +107,4 @@ function removeListItem() {
       }
     });
   }
-  // add function to also remove random Number form currentRandomNumbers
 }
