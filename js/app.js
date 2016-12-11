@@ -29,21 +29,9 @@
 // every incorrect input - the screen flashes red?
 
 
-// things to do
-// generate a word
-// append that word to div at random position of top and left
-// word needs to have position relative? absolute?
-// set an animation - within that function set a function that checks position left to div width
+$(parseBoard);
 
-
-$(init);
-
-var currentWord          = [];
-var currentRandomNumbers = [];  // add a condition so that two random numbers are not the same
-
-function init() {
-  parseBoard();
-}
+var currentWord = [];
 
 // Generates a new word every x seconds
 setInterval(randomWord, 1000);
@@ -101,19 +89,14 @@ function doesMatch(e) {
   }
 }
 
-
 // Function that removes li after typed
 function removeListItem() {
   var $input = $('input').val();
   var index = currentWord.indexOf($input);
   var $lisArray = $('.board').children();
-  console.log($lisArray);
-
   if (index > -1) {
     currentWord.splice(index, 1);
-    console.log('deleting...');
     $($lisArray).each(function(i, elem) {
-      console.log($(elem).text());
       if ($(elem).text() === $input) {
         $(elem).remove();
         $('.board').append('<li></li>');
