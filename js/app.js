@@ -55,7 +55,8 @@ function parseBoard() {
   var highScore     = '<h4 id="highScore">High score: ' + parseHighScore(currentLevel) + '</h4>';
   var input         = '<input type="text" value="" placeholder="type here" autofocus="autofocus">';
   for (var i = 0; i < 20; i++) {
-    $('.board').append('<li></li>');
+    // $('.board').append('<li></li>');
+    $('.board').append('<div class="word"></div>');
   }
   $('.buttons').remove();
   $('.finalScore').remove();
@@ -68,13 +69,15 @@ setInterval(randomWord, interval);
 
 // Generates a random word and parse it to unordered list
 function randomWord() {
-  var requestStr = 'http://randomword.setgetgo.com/get.php';
-  $.ajax({
-    type: 'GET',
-    url: requestStr,
-    dataType: 'jsonp',
-    jsonpCallback: 'parseWord'
-  });
+  // var requestStr = 'http://randomword.setgetgo.com/get.php';
+  // $.ajax({
+  //   type: 'GET',
+  //   url: requestStr,
+  //   dataType: 'jsonp',
+  //   jsonpCallback: 'parseWord'
+  // });
+  var randomWordNumber = Math.floor(Math.random() * (window.words.length -1 )) + 1;
+  parseWord(window.words[randomWordNumber]);
 }
 
 // Parse random word in a random list item and push it to currentWord array
@@ -82,9 +85,9 @@ function parseWord(word) {
   var $lisArray     = $('.board').children();
   var randomNumber  = (Math.floor(Math.random() * 19) + 1);
   if ($($lisArray[randomNumber]).html() === '') {
-    $lisArray[randomNumber].append(word.Word);
+    $lisArray[randomNumber].append(word);
     wordMove($lisArray[randomNumber]);
-    currentWord.push(word.Word);
+    currentWord.push(word);
   }
 }
 
@@ -113,7 +116,7 @@ function doesMatch(e) {
     changeBackground();
   } else {
     $('input').val('');
-    $('.game').effect('highlight', 'red');
+    $('.game').effect('highlight');
   }
   decreaseInterval();
 }
@@ -160,9 +163,9 @@ function gameOver() {
 }
 
 function gameOverScreen() {
-  var finalScore  = '<h4 class="finalScore">Your score is: ';
+  var finalScore  = '<h2 class="finalScore">Your score is: ';
   finalScore      += score + '<br>High score: ' + parseHighScore(currentLevel);
-  finalScore      +='<br>Wanna play again?</h4>';
+  finalScore      +='<br>Wanna play again?</h2>';
   var easy        = '<button type="button" name="button" id="easy">Grandma</button>';
   var normal      = '<button type="button" name="button" id="normal">Boring</button>';
   var extreme     = '<button type="button" name="button" id="extreme">Extreme</button>';

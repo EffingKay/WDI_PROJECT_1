@@ -1,0 +1,9 @@
+window.words = ['Abibliophobia', 'Absquatulate', 'Allegator', 'Anencephalous', 'Argle-bargle', 'Batrachomyomachy', 'fear', 'running', 'reading', 'material', 'Absquatulate', 'Doozy',	'Dudgeon',	'Ecdysiast', 'stripper', 'Eructation', 'Fard', 'Fartlek', 'athletic',
+  'Fatuous',	'Unconsciously', 'Filibuster', 'Refusal', 'prevent', 'Firkin', 'Flibbertigibbet', 'Flummox', 'exasperate', 'Folderol', 'Formication', 'Furbelow', 'fringe', 'ruffle', 'Furphy', 'Gaberlunzie', 'wandering', 'beggar', 'Gardyloo', 'Gastromancy',
+  'fortune', 'rumblings', 'stomach', 'Gazump', 'Gobbledygook', 'Gobemouche', 'Godwottery', 'balderdash', 'Gongoozle', 'kibitz', 'Gonzo', 'journalism', 'Goombah', 'Hemidemisemiquaver', 'Hobbledehoy', 'Deceitful', 'sleight', 'Hoosegow', 'Hootenanny','Jackanapes',
+  'rapscallion', 'hooligan', 'Kerfuffle', 'Nonsense', 'balderdash', 'Klutz', 'awkward', 'interjection', 'pretentious', 'Lagopodous', 'Lickspittle', 'toady', 'Logorrhea',	'Loquaciousness', 'talkativeness', 'Lollygag', 'behind', 'Malarkey',	'Nonsense', 'balderdash',
+  'Maverick', 'Mollycoddle', 'leniently', 'independent', 'politician', 'Mumpsimus', 'outdated', 'unreasonable', 'position', 'issue', 'backbone',
+  'Nincompoop', 'foolish', 'Oocephalus', 'egghead', 'Ornery', 'grumpy', 'Pandiculation', 'stretch', 'Panjandrum', 'mighty', 'Pettifogger', 'befuddle',
+  'Pratfall', 'Quean', 'disreputable', 'Rambunctious', 'Aggressive', 'Ranivorous', 'Rigmarole',	'Nonsense', 'unnecessary', 'complexity', 'Shenanigan', 'mischief', 'Sialoquent', 'Spitting', 'speaking', 'Skedaddle', 'Skullduggery', 'underhanded', 'dealing',
+  'Slangwhanger', 'abusive', 'speaker', 'obnoxious', 'Smellfungus', 'perpetual', 'pessimist', 'Snickersnee', 'Snollygoster',
+  'Snool', 'servile', 'Tatterdemalion', 'Troglodyte', 'something', 'Turdiform', 'Unremacadamized', 'repaved', 'macadam', 'Vomitory', 'outlet', 'Wabbit', 'Exhausted', 'Widdershins', 'contrary', 'counterclockwise', 'direction', 'Yahoo'];
