@@ -47,7 +47,7 @@ function parseBoard() {
   currentWord       = [];
   score             = 0;
   var currentScore  = '<h4 id="score">Score: 0</h4>';
-  var input         = '<input type="text" value="" placeholder="type here" autofocus>';
+  var input         = '<input type="text" value="" placeholder="type here" autofocus="autofocus">';
   for (var i = 0; i < 25; i++) {
     $('.board').append('<li></li>');
   }
@@ -149,12 +149,9 @@ function gameOverScreen() {
   var normal = '<button type="button" name="button" id="normal">Boring</button>';
   var extreme = '<button type="button" name="button" id="extreme">Extreme</button>';
   var buttons = '<div class="buttons">' + easy + normal + extreme + '</div>';
-  $('.main').prepend(buttons);
-  $('.main').prepend(finalScore);
+  $('.main').prepend(finalScore, buttons);
   $('input').remove();
-  $('#normal').on('click', parseBoard);
-  $('#easy').on('click', easyLevel);
-  $('#extreme').on('click', extremeLevel);
+  startGame();
 }
 
 
