@@ -62,11 +62,11 @@ setInterval(randomWord, interval);
 
 // Generates a random word and parse it to unordered list
 function randomWord() {
-  var requestStr = 'http://randomword.setgetgo.com/get.php';
+  var requestStr = 'randomword.setgetgo.com/get.php';
   $.ajax({
     type: 'GET',
     url: requestStr,
-    dataType: 'json',
+    dataType: 'jsonp',
     jsonpCallback: 'parseWord'
   });
 }
