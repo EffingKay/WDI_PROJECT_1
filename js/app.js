@@ -74,7 +74,10 @@ function wordMove(word) {
   $(word).animate({
     marginLeft: $windowWidth
   }, 20000, function(){
-    console.log('GAME OVER - callback to go here');
+    if ($(word).text() !== '') {
+      console.log('haha, you LOSE');
+    }
+
   });
 }
 
@@ -83,12 +86,10 @@ function doesMatch(e) {
   e.preventDefault();
   var typed = $('input').val();
   if ( currentWord.indexOf(typed) > -1 ) {
-    console.log('SUCCESS');
     removeListItem();
     $('input').val('');
     doesMatch;
   } else {
-    console.log('working?');
     $('input').val('');
   }
 }
@@ -102,8 +103,8 @@ function removeListItem() {
     currentWord.splice(index, 1);
     $($lisArray).each(function(i, elem) {
       if ($(elem).text() === $input) {
-        $(elem).text('');
-        // $(elem).css('marginLeft', '0');
+        $(elem).text('').finish().css('marginLeft', '0px');
+        // $(elem).finish().css('marginLeft', '0');
         // $('.board').append('<li></li>');
       }
     });
