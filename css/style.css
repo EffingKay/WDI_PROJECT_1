@@ -1,6 +1,7 @@
 body {
   background-color: lightyellow;
   margin: 0;
+  text-align: center;
 }
 
 ul {
@@ -9,4 +10,5 @@ ul {
   padding: 0;
   margin: 0;
   overflow: hidden;
+  text-align: left;
 }
