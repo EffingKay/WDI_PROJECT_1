@@ -65,7 +65,7 @@ function parseWord(word) {
     currentWord.push(word.Word);
   }
   console.log($($lisArray[randomNumber]).html());
-}   /// ADD A FUNCTION TO CHECK IF THE LI IS EMPTY
+}
 
 
 // Animates the word across board
@@ -102,8 +102,9 @@ function removeListItem() {
     currentWord.splice(index, 1);
     $($lisArray).each(function(i, elem) {
       if ($(elem).text() === $input) {
-        $(elem).remove();
-        $('.board').append('<li></li>');
+        $(elem).text('');
+        // $(elem).css('marginLeft', '0');
+        // $('.board').append('<li></li>');
       }
     });
   }
