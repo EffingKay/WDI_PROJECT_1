@@ -49,14 +49,14 @@ function parseBoard() {
   currentWord       = [];
   interval          = 4000;
   animationDuration = 20000;
-  var currentScore = '<h4 id="score">Score: 0</h4>';
+  var currentScore  = '<h4 id="score">Score: 0</h4>';
   var input         = '<input type="text" value="" placeholder="type here" autofocus>';
   for (var i = 0; i < 25; i++) {
     $('.board').append('<li></li>');
   }
   $('#start').remove();
-  $('form').append(input);
   $('.main').prepend(currentScore);
+  $('form').append(input);
   $('form').on('submit', doesMatch);
 }
 
