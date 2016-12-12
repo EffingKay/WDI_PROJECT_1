@@ -29,18 +29,28 @@
 // every incorrect input - the screen flashes red?
 
 
-$(parseBoard);
+$(startGame);
 
-var currentWord = [];
+var currentWord       = [];
+var interval          = 4000;
+var animationDuration = 20000;
+var score              = 0;
+
+function startGame() {
+  $('#start').on('click', parseBoard);
+}
 
 // Generates a new word every x seconds
-setInterval(randomWord, 2500);
+setInterval(randomWord, interval);
 
 // Creates a board with list items which will be populated with random words later
 function parseBoard() {
+  var input = '<input type="text" value="" placeholder="type here" autofocus>';
   for (var i = 0; i < 25; i++) {
     $('.board').append('<li></li>');
   }
+  $('#start').remove();
+  $('form').append(input);
   $('form').on('submit', doesMatch);
 }
 
@@ -64,7 +74,6 @@ function parseWord(word) {
     wordMove($lisArray[randomNumber]);
     currentWord.push(word.Word);
   }
-  console.log($($lisArray[randomNumber]).html());
 }
 
 
@@ -73,7 +82,7 @@ function wordMove(word) {
   var $windowWidth = $(window).width() + 'px';
   $(word).animate({
     marginLeft: $windowWidth
-  }, 20000, function(){
+  }, animationDuration, function(){
     if ($(word).text() !== '') {
       console.log('haha, you LOSE');
     }
@@ -89,9 +98,12 @@ function doesMatch(e) {
     removeListItem();
     $('input').val('');
     doesMatch;
+    score++;
+    $('#score').html('Score: ' + score);
   } else {
     $('input').val('');
   }
+  decreaseInterval();
 }
 
 // Function that removes li after typed
@@ -104,9 +116,19 @@ function removeListItem() {
     $($lisArray).each(function(i, elem) {
       if ($(elem).text() === $input) {
         $(elem).text('').finish().css('marginLeft', '0px');
-        // $(elem).finish().css('marginLeft', '0');
-        // $('.board').append('<li></li>');
       }
     });
+  }
+}
+
+
+// add decreasing interval function
+function decreaseInterval() {
+  if (score % 3 === 0 && interval > 500) {
+    interval -= 500;
+    console.log('Interval: ' + interval);
+  } else if (score % 5 === 0) {
+    animationDuration -= 1000;
+    console.log('anim duration: ' + animationDuration);
   }
 }
