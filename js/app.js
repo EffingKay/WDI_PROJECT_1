@@ -32,12 +32,14 @@
 $(startGame);
 
 var currentWord        = [];
-var interval           = 4000;
-var animationDuration  = 20000;
+var interval           = 2500;
+var animationDuration  = 15000;
 var score              = 0;
 
 function startGame() {
-  $('#start').on('click', parseBoard);
+  $('#normal').on('click', parseBoard);
+  $('#easy').on('click', easyLevel);
+  $('#hard').on('click', extremeLevel);
 }
 
 // Generates a new word every x seconds
@@ -45,19 +47,16 @@ setInterval(randomWord, interval);
 
 // Creates a board with list items which will be populated with random words later
 function parseBoard() {
-  score             = 0;
-  currentWord       = [];
-  interval          = 4000;
-  animationDuration = 20000;
   var currentScore  = '<h4 id="score">Score: 0</h4>';
   var input         = '<input type="text" value="" placeholder="type here" autofocus>';
   for (var i = 0; i < 25; i++) {
     $('.board').append('<li></li>');
   }
-  $('#start').remove();
+  $('.buttons').remove();
   $('.main').prepend(currentScore);
   $('form').append(input);
   $('form').on('submit', doesMatch);
+  console.log(interval, animationDuration);
 }
 
 // Generates a random word and parse it to unordered list
@@ -156,4 +155,21 @@ function gameOverScreen() {
     $('.finalScore').remove();
     parseBoard();
   });
+}
+
+
+function easyLevel() {
+  currentWord        = [];
+  interval           = 4000;
+  animationDuration  = 20000;
+  score              = 0;
+  parseBoard();
+}
+
+function extremeLevel() {
+  currentWord        = [];
+  interval           = 200;
+  animationDuration  = 7500;
+  score              = 0;
+  parseBoard();
 }
