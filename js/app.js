@@ -40,6 +40,7 @@ function startGame() {
   $('#normal').on('click', parseBoard);
   $('#easy').on('click', easyLevel);
   $('#hard').on('click', extremeLevel);
+  // $('.finalScore').remove();
 }
 
 // Generates a new word every x seconds
@@ -53,6 +54,7 @@ function parseBoard() {
     $('.board').append('<li></li>');
   }
   $('.buttons').remove();
+  $('.finalScore').remove();
   $('.main').prepend(currentScore);
   $('form').append(input);
   $('form').on('submit', doesMatch);
@@ -130,10 +132,8 @@ function removeListItem() {
 function decreaseInterval() {
   if (score % 3 === 0 && interval > 500) {
     interval -= 500;
-    console.log('Interval: ' + interval);
   } else if (score % 5 === 0) {
     animationDuration -= 1000;
-    console.log('anim duration: ' + animationDuration);
   }
 }
 
@@ -146,15 +146,17 @@ function gameOver() {
 }
 
 function gameOverScreen() {
-  var newGameButton = '<button id="newGame">Wanna play again?</button>';
   var finalScore    = '<p class="finalScore">Your score is: ' + score + '</p>';
+  // var easy = '<button type="button" name="button" id="easy">Grandma</button>';
+  // var normal = '<button type="button" name="button" id="normal">Boring</button>';
+  // var hard = '<button type="button" name="button" id="hard">Extreme</button>';
+  var buttons = '<div class="buttons"><button type="button" name="button" id="easy">Grandma</button><button type="button" name="button" id="normal">Boring</button><button type="button" name="button" id="hard">Extreme</button></div>';
   $('.board').prepend(finalScore);
-  $('.board').append(newGameButton);
-  $('#newGame').on('click', function(){
-    $('#newGame').remove();
-    $('.finalScore').remove();
-    parseBoard();
-  });
+  $('.main').prepend(buttons);
+  $('input').remove();
+  $('#normal').on('click', parseBoard);
+  $('#easy').on('click', easyLevel);
+  $('#hard').on('click', extremeLevel);
 }
 
 
@@ -168,7 +170,7 @@ function easyLevel() {
 
 function extremeLevel() {
   currentWord        = [];
-  interval           = 200;
+  interval           = 10;
   animationDuration  = 7500;
   score              = 0;
   parseBoard();
