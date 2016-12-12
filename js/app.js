@@ -31,9 +31,9 @@
 
 $(startGame);
 
-var currentWord       = [];
-var interval          = 4000;
-var animationDuration = 20000;
+var currentWord        = [];
+var interval           = 4000;
+var animationDuration  = 20000;
 var score              = 0;
 
 function startGame() {
@@ -45,12 +45,18 @@ setInterval(randomWord, interval);
 
 // Creates a board with list items which will be populated with random words later
 function parseBoard() {
-  var input = '<input type="text" value="" placeholder="type here" autofocus>';
+  score             = 0;
+  currentWord       = [];
+  interval          = 4000;
+  animationDuration = 20000;
+  var currentScore = '<h4 id="score">Score: 0</h4>';
+  var input         = '<input type="text" value="" placeholder="type here" autofocus>';
   for (var i = 0; i < 25; i++) {
     $('.board').append('<li></li>');
   }
   $('#start').remove();
   $('form').append(input);
+  $('.main').prepend(currentScore);
   $('form').on('submit', doesMatch);
 }
 
@@ -67,8 +73,8 @@ function randomWord() {
 
 // Parse random word in a random list item and push it to currentWord array
 function parseWord(word) {
-  var $lisArray = $('.board').children();
-  var randomNumber = (Math.floor(Math.random() * 24) + 1);
+  var $lisArray     = $('.board').children();
+  var randomNumber  = (Math.floor(Math.random() * 24) + 1);
   if ($($lisArray[randomNumber]).html() === '') {
     $lisArray[randomNumber].append(word.Word);
     wordMove($lisArray[randomNumber]);
@@ -84,9 +90,8 @@ function wordMove(word) {
     marginLeft: $windowWidth
   }, animationDuration, function(){
     if ($(word).text() !== '') {
-      console.log('haha, you LOSE');
+      gameOver();
     }
-
   });
 }
 
@@ -108,8 +113,8 @@ function doesMatch(e) {
 
 // Function that removes li after typed
 function removeListItem() {
-  var $input = $('input').val();
-  var index = currentWord.indexOf($input);
+  var $input    = $('input').val();
+  var index     = currentWord.indexOf($input);
   var $lisArray = $('.board').children();
   if (index > -1) {
     currentWord.splice(index, 1);
@@ -122,7 +127,7 @@ function removeListItem() {
 }
 
 
-// add decreasing interval function
+// decreasing interval and animation duration with progress
 function decreaseInterval() {
   if (score % 3 === 0 && interval > 500) {
     interval -= 500;
@@ -131,4 +136,24 @@ function decreaseInterval() {
     animationDuration -= 1000;
     console.log('anim duration: ' + animationDuration);
   }
+}
+
+// game over function
+function gameOver() {
+  $('.board').children().stop().remove();
+  $('input').remove();
+  $('#score').remove();
+  gameOverScreen();
+}
+
+function gameOverScreen() {
+  var newGameButton = '<button id="newGame">Wanna play again?</button>';
+  var finalScore    = '<p class="finalScore">Your score is: ' + score + '</p>';
+  $('.board').prepend(finalScore);
+  $('.board').append(newGameButton);
+  $('#newGame').on('click', function(){
+    $('#newGame').remove();
+    $('.finalScore').remove();
+    parseBoard();
+  });
 }
