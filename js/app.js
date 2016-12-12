@@ -35,6 +35,11 @@ var currentWord        = [];
 var interval           = 2500;
 var animationDuration  = 15000;
 var score              = 0;
+var highEasy           = 0;
+var highNormal         = 0;
+var highExtreme        = 0;
+var currentLevel       = 'normal';
+
 
 function startGame() {
   $('#normal').on('click', parseBoard);
@@ -47,13 +52,14 @@ function parseBoard() {
   currentWord       = [];
   score             = 0;
   var currentScore  = '<h4 id="score">Score: 0</h4>';
+  var highScore     = '<h4 id="highScore">High score: ' + parseHighScore(currentLevel) + '</h4>';
   var input         = '<input type="text" value="" placeholder="type here" autofocus="autofocus">';
   for (var i = 0; i < 25; i++) {
     $('.board').append('<li></li>');
   }
   $('.buttons').remove();
   $('.finalScore').remove();
-  $('.main').prepend(currentScore);
+  $('.main').prepend(highScore, currentScore);
   $('form').append(input).on('submit', doesMatch);
 }
 
@@ -62,7 +68,7 @@ setInterval(randomWord, interval);
 
 // Generates a random word and parse it to unordered list
 function randomWord() {
-  var requestStr = '//randomword.setgetgo.com/get.php';
+  var requestStr = 'http://randomword.setgetgo.com/get.php';
   $.ajax({
     type: 'GET',
     url: requestStr,
@@ -140,29 +146,58 @@ function gameOver() {
   $('.board').children().stop().remove();
   $('input').remove();
   $('#score').remove();
+  $('#highScore').remove();
+  if (currentLevel === 'easy') {
+    highEasy = highestScore(score, highEasy);
+  } else if (currentLevel === 'normal') {
+    highNormal = highestScore(score, highNormal);
+  } else {
+    highExtreme = highestScore(score, highExtreme);
+  }
   gameOverScreen();
 }
 
 function gameOverScreen() {
-  var finalScore    = '<h4 class="finalScore">Your score is: ' + score + '<br>Wanna play again?</h4>';
-  var easy = '<button type="button" name="button" id="easy">Grandma</button>';
-  var normal = '<button type="button" name="button" id="normal">Boring</button>';
-  var extreme = '<button type="button" name="button" id="extreme">Extreme</button>';
-  var buttons = '<div class="buttons">' + easy + normal + extreme + '</div>';
+  var finalScore  = '<h4 class="finalScore">Your score is: ';
+  finalScore      += score + '<br>High score: ' + parseHighScore(currentLevel);
+  finalScore      +='<br>Wanna play again?</h4>';
+  var easy        = '<button type="button" name="button" id="easy">Grandma</button>';
+  var normal      = '<button type="button" name="button" id="normal">Boring</button>';
+  var extreme     = '<button type="button" name="button" id="extreme">Extreme</button>';
+  var buttons     = '<div class="buttons">' + easy + normal + extreme + '</div>';
   $('.main').prepend(finalScore, buttons);
   $('input').remove();
   startGame();
 }
 
+function highestScore(score, highScore) {
+  if (score > highScore) {
+    return score;
+  } else {
+    return highScore;
+  }
+}
+
+function parseHighScore(level) {
+  if (level === 'easy') {
+    return highEasy;
+  } else if (level === 'normal') {
+    return highNormal;
+  } else {
+    return highExtreme;
+  }
+}
 
 function easyLevel() {
   interval           = 4000;
   animationDuration  = 20000;
+  currentLevel       = 'easy';
   parseBoard();
 }
 
 function extremeLevel() {
   interval           = 10;
   animationDuration  = 7500;
+  currentLevel       = 'extreme';
   parseBoard();
 }
