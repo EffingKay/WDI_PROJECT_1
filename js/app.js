@@ -54,7 +54,7 @@ function parseBoard() {
   var currentScore  = '<h4 id="score">Score: 0</h4>';
   var highScore     = '<h4 id="highScore">High score: ' + parseHighScore(currentLevel) + '</h4>';
   var input         = '<input type="text" value="" placeholder="type here" autofocus="autofocus">';
-  for (var i = 0; i < 25; i++) {
+  for (var i = 0; i < 20; i++) {
     $('.board').append('<li></li>');
   }
   $('.buttons').remove();
@@ -80,7 +80,7 @@ function randomWord() {
 // Parse random word in a random list item and push it to currentWord array
 function parseWord(word) {
   var $lisArray     = $('.board').children();
-  var randomNumber  = (Math.floor(Math.random() * 24) + 1);
+  var randomNumber  = (Math.floor(Math.random() * 19) + 1);
   if ($($lisArray[randomNumber]).html() === '') {
     $lisArray[randomNumber].append(word.Word);
     wordMove($lisArray[randomNumber]);
@@ -110,8 +110,10 @@ function doesMatch(e) {
     doesMatch;
     score++;
     $('#score').html('Score: ' + score);
+    changeBackground();
   } else {
     $('input').val('');
+    $('.game').effect('highlight', 'red');
   }
   decreaseInterval();
 }
@@ -200,4 +202,11 @@ function extremeLevel() {
   animationDuration  = 7500;
   currentLevel       = 'extreme';
   parseBoard();
+}
+
+
+function changeBackground() {
+  var randomColors = ['#FF1962', '#8EE0F2', '#FFB5CB', '#AFC97E', '#B84256', '#68EDCC', '#F4B8B2', '#F25959', '#D8E2DC', '#FFCAD4', '#FFE5D9'];
+  var randomNumber = Math.floor(Math.random() * (randomColors.length-1)) + 1;
+  $('body').css('backgroundColor', randomColors[randomNumber]);
 }
