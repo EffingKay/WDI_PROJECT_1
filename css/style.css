@@ -1,5 +1,5 @@
 body {
-  background-color: #8EE0F2;
+  background-color: #FFD23F;
   margin: 0;
   text-align: center;
   font-family: 'Comfortaa', cursive;
@@ -72,7 +72,6 @@ button {
   color: black;
   font-family: 'Comfortaa', cursive;
   background-image: url('http://dl.glitter-graphics.com/pub/3106/3106034k21a2gpbeb.gif');
-
 }
 
 button:hover {
