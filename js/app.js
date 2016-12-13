@@ -160,7 +160,7 @@ function gameOver() {
 function gameOverScreen() {
   var youTried    = '<img src="http://vignette4.wikia.nocookie.net/degrassi/images/a/a8/You_tried.png/revision/latest?cb=20131018202400" class="youTried">';
   var youWon      = '<img src="https://sketchingwithhardware.files.wordpress.com/2014/04/grumpycat.png" class="youTried">';
-  youWon          += '<h1>You won! Grumpy cat is now happy!</h1>';
+  youWon          += '<h1>You won! Grumpy cat is now in the black hole and happy!</h1>';
   var finalScore  = '<h2 class="finalScore">Your score is: ';
   finalScore      += score + '<br>High score: ' + parseHighScore(currentLevel);
   finalScore      +='<br>Wanna play again?</h2>';
@@ -215,7 +215,9 @@ function extremeLevel() {
 
 
 function changeBackground() {
-  var randomColors = ['#FF1962', '#8EE0F2', '#FFB5CB', '#AFC97E', '#B84256', '#68EDCC', '#F4B8B2', '#F25959', '#D8E2DC', '#FFCAD4', '#FFE5D9'];
+  var randomColors = ['#FF1962', '#8EE0F2', '#FFB5CB', '#18A346',
+    '#B84256', '#68EDCC', '#F16146', '#F25959',
+    '#FF3338', '#00ACAE', '#FFFF5D', '#0090C9'];
   var randomNumber = Math.floor(Math.random() * (randomColors.length-1)) + 1;
   $('body').css('backgroundColor', randomColors[randomNumber]);
 }
