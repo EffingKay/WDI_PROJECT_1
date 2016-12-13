@@ -55,7 +55,6 @@ function parseBoard() {
   var highScore     = '<h4 id="highScore">High score: ' + parseHighScore(currentLevel) + '</h4>';
   var input         = '<input type="text" value="" placeholder="type here" autofocus="autofocus">';
   for (var i = 0; i < 20; i++) {
-    // $('.board').append('<li></li>');
     $('.board').append('<div class="word"></div>');
   }
   $('.buttons').remove();
@@ -113,6 +112,7 @@ function doesMatch(e) {
   } else {
     $('input').val('');
     playSound('error');
+    $('input').effect('highlight');
   }
   decreaseInterval();
   saveTheCat();

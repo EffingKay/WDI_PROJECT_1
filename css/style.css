@@ -23,6 +23,7 @@ h1 {
 h4 {
   display: inline-block;
   margin: 0 2em;
+  font-size: 1.5em;
 }
 
 .board {
@@ -63,14 +64,15 @@ h4 {
 }
 
 button {
-  padding: 1em 2em;
+  padding: 2em 4em;
   margin-right: 2em;
   border-radius: 5px;
   border: 2px solid black;
-  background-color: rgba(0, 0, 0, 0)  ;
   font-size: 1em;
   color: black;
   font-family: 'Comfortaa', cursive;
+  background-image: url('http://dl.glitter-graphics.com/pub/3106/3106034k21a2gpbeb.gif');
+
 }
 
 button:hover {
