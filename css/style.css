@@ -1,5 +1,5 @@
 body {
-  background-color: #FFD23F;
+  background-color: #F5BB00;
   margin: 0;
   text-align: center;
   font-family: 'Comfortaa', cursive;
@@ -18,6 +18,12 @@ body {
 
 h1 {
   font-size: 3em;
+  font-weight: 800;
+  font-family: 'Abril Fatface', cursive;
+}
+
+h2 {
+  margin-bottom: 2em;
 }
 
 h4 {
@@ -40,12 +46,10 @@ h4 {
 }
 
 .cat,
-.rainbow,
 .blackHole {
-  height: 80px;
+  width: 80px;
 }
 
-.rainbow,
 .cat {
   float: left;
 }
@@ -59,24 +63,25 @@ h4 {
   margin: 0 auto;
 }
 
-.youTried {
-  height: 250px;
+.buttons {
+  font-family: 'Comfortaa', cursive;
 }
 
 button {
-  padding: 2em 4em;
+  padding: 1em 3em;
   margin-right: 2em;
   border-radius: 5px;
-  border: 2px solid black;
-  font-size: 1em;
-  color: black;
+  border: 2px solid #222;
+  color: #FAFAFA;
   font-family: 'Comfortaa', cursive;
-  background-image: url('http://dl.glitter-graphics.com/pub/3106/3106034k21a2gpbeb.gif');
+
+  font-size: 1em;
+  background: #222;
 }
 
 button:hover {
-  background: black;
-  color: white;
+  background: rgba(0, 0, 0, 0);
+  color: #222;
 }
 
 input {
@@ -88,4 +93,7 @@ input {
   border: 10px;
   font-size: .7em;
   margin-top: .4em;
+  text-align: center;
+  width: 60%;
+  font-family: 'Comfortaa', cursive;
 }

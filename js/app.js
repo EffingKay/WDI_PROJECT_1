@@ -1,33 +1,17 @@
-// Typing game
-
-// Words will appear on left hand side of the screen and slowly move to the right
-// User needs to type the words on screen in order to clear them
-// If any word reaches the right side, the player looses
-// Score - the number of words cleared
-
 // TODO
 // Create div where the generated words will appear
 // Create an input where user types the words
-// Generate the words - use random words API
-// start with 5 every second, add another every 5s - setInterval()
+// Generate the words
+// start with x every second, add another every x s - setInterval()
 // When generated push the words into currentWords array
 // If user's input matches any of the words in currentWords
 // clear the word from the div
 // increase Score
 // clear input
 // create function that moves the words to the right with time passing
-// moving through the width of the parent - HOW????
-// decreasing mergin-right by Xpx every Xs
 
 // Game over
 // when amrgin right is 0
-
-
-
-// unnecessary features
-// background color changes after every correct input?
-// every incorrect input - the screen flashes red?
-
 
 $(startGame);
 
@@ -53,14 +37,13 @@ function parseBoard() {
   score             = 0;
   var currentScore  = '<h4 id="score">Score: 0</h4>';
   var highScore     = '<h4 id="highScore">High score: ' + parseHighScore(currentLevel) + '</h4>';
-  var input         = '<input type="text" value="" class="typehere" placeholder="type here" autofocus="autofocus">';
+  var input         = '<input type="text" value="" class="typehere" autofocus="autofocus">';
   for (var i = 0; i < 20; i++) {
     $('.board').append('<div class="word"></div>');
   }
   $('.buttons').remove();
   $('.finalScore').remove();
   $('.youTried').remove();
-  $('.cat').css('marginLeft', '0');
   $('.main').prepend(highScore, currentScore);
   $('form').append(input).on('submit', doesMatch);
   $('.typehere').focus();
@@ -106,17 +89,15 @@ function doesMatch(e) {
     removeListItem();
     $('input').val('');
     doesMatch;
+    playSound('correct');
     score++;
     $('#score').html('Score: ' + score);
     changeBackground();
-    playSound('correct');
   } else if ( currentWord.indexOf(typed) === -1) {
     $('input').val('');
-    playSound('error');
   }
   $('input').effect('highlight');
   decreaseInterval();
-  saveTheCat();
 }
 
 // Function that removes li after typed
@@ -157,13 +138,11 @@ function gameOver() {
     highExtreme = highestScore(score, highExtreme);
   }
   gameOverScreen();
+  playSound('gameOver');
 }
 
 // game over - lost
 function gameOverScreen() {
-  var youTried    = '<img src="http://vignette4.wikia.nocookie.net/degrassi/images/a/a8/You_tried.png/revision/latest?cb=20131018202400" class="youTried">';
-  var youWon      = '<img src="https://sketchingwithhardware.files.wordpress.com/2014/04/grumpycat.png" class="youTried">';
-  youWon          += '<h1>You won! Grumpy cat is now in the black hole and happy!</h1>';
   var finalScore  = '<h2 class="finalScore">Your score is: ';
   finalScore      += score + '<br>High score: ' + parseHighScore(currentLevel);
   finalScore      +='<br>Wanna play again?</h2>';
@@ -172,11 +151,6 @@ function gameOverScreen() {
   var extreme     = '<button type="button" name="button" id="extreme">Extreme</button>';
   var buttons     = '<div class="buttons">' + easy + normal + extreme + '</div>';
   $('.main').prepend(finalScore, buttons);
-  if (score < 50) {
-    $('.main').prepend(youTried);
-  } else {
-    $('.main').prepend(youWon);
-  }
   $('input').remove();
   startGame();
 }
@@ -223,25 +197,12 @@ function changeBackground() {
   $('body').css('backgroundColor', randomColors[randomNumber]);
 }
 
-function saveTheCat() {
-  if (score > 0 && score % 10 === 0) {
-    $('.cat').animate({
-      marginLeft: '+=105px'
-    }, 2000);
-    playSound('cat');
-  } else if (score >= 50) {
-    gameOver();
-  }
-}
-
 function playSound(event) {
   var eventSource;
-  if (event === 'cat') {
-    eventSource = './sounds/meow.mp3';
-  } else if (event === 'correct') {
+  if (event === 'correct') {
     eventSource = './sounds/gong.mp3';
-  } else {
-    eventSource = './sounds/error.mp3';
+  } else if (event === 'gameOver') {
+    eventSource = './sounds/gameOver.mp3';
   }
   var audio = new Audio;
   $('body').append(audio);
