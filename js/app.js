@@ -32,8 +32,8 @@
 $(startGame);
 
 var currentWord        = [];
-var interval           = 2500;
-var animationDuration  = 15000;
+var interval           = 1500;
+var animationDuration  = 12000;
 var score              = 0;
 var highEasy           = 0;
 var highNormal         = 0;
@@ -60,6 +60,7 @@ function parseBoard() {
   }
   $('.buttons').remove();
   $('.finalScore').remove();
+  $('.youTried').remove();
   $('.main').prepend(highScore, currentScore);
   $('form').append(input).on('submit', doesMatch);
 }
@@ -69,13 +70,6 @@ setInterval(randomWord, interval);
 
 // Generates a random word and parse it to unordered list
 function randomWord() {
-  // var requestStr = 'http://randomword.setgetgo.com/get.php';
-  // $.ajax({
-  //   type: 'GET',
-  //   url: requestStr,
-  //   dataType: 'jsonp',
-  //   jsonpCallback: 'parseWord'
-  // });
   var randomWordNumber = Math.floor(Math.random() * (window.words.length -1 )) + 1;
   parseWord(window.words[randomWordNumber]);
 }
@@ -116,9 +110,9 @@ function doesMatch(e) {
     changeBackground();
   } else {
     $('input').val('');
-    $('.game').effect('highlight');
   }
   decreaseInterval();
+  saveTheCat();
 }
 
 // Function that removes li after typed
@@ -162,7 +156,11 @@ function gameOver() {
   gameOverScreen();
 }
 
+// game over - lost
 function gameOverScreen() {
+  var youTried    = '<img src="http://vignette4.wikia.nocookie.net/degrassi/images/a/a8/You_tried.png/revision/latest?cb=20131018202400" class="youTried">';
+  var youWon      = '<img src="https://sketchingwithhardware.files.wordpress.com/2014/04/grumpycat.png" class="youTried">';
+  youWon          += '<h1>You won! Grumpy cat is now happy!</h1>';
   var finalScore  = '<h2 class="finalScore">Your score is: ';
   finalScore      += score + '<br>High score: ' + parseHighScore(currentLevel);
   finalScore      +='<br>Wanna play again?</h2>';
@@ -170,11 +168,19 @@ function gameOverScreen() {
   var normal      = '<button type="button" name="button" id="normal">Boring</button>';
   var extreme     = '<button type="button" name="button" id="extreme">Extreme</button>';
   var buttons     = '<div class="buttons">' + easy + normal + extreme + '</div>';
+
   $('.main').prepend(finalScore, buttons);
+  if (score < 50) {
+    $('.main').prepend(youTried);
+  } else {
+    $('.main').prepend(youWon);
+  }
   $('input').remove();
   startGame();
 }
 
+
+// determine high score
 function highestScore(score, highScore) {
   if (score > highScore) {
     return score;
@@ -194,15 +200,15 @@ function parseHighScore(level) {
 }
 
 function easyLevel() {
-  interval           = 4000;
-  animationDuration  = 20000;
+  interval           = 3000;
+  animationDuration  = 17000;
   currentLevel       = 'easy';
   parseBoard();
 }
 
 function extremeLevel() {
-  interval           = 10;
-  animationDuration  = 7500;
+  interval           = 5;
+  animationDuration  = 7000;
   currentLevel       = 'extreme';
   parseBoard();
 }
@@ -212,4 +218,14 @@ function changeBackground() {
   var randomColors = ['#FF1962', '#8EE0F2', '#FFB5CB', '#AFC97E', '#B84256', '#68EDCC', '#F4B8B2', '#F25959', '#D8E2DC', '#FFCAD4', '#FFE5D9'];
   var randomNumber = Math.floor(Math.random() * (randomColors.length-1)) + 1;
   $('body').css('backgroundColor', randomColors[randomNumber]);
+}
+
+function saveTheCat() {
+  if (score > 0 && score % 10 === 0) {
+    $('.cat').animate({
+      marginLeft: '+=105px'
+    }, 2000);
+  } else if (score >= 50) {
+    gameOver();
+  }
 }
