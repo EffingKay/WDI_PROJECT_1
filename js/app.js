@@ -61,6 +61,7 @@ function parseBoard() {
   $('.buttons').remove();
   $('.finalScore').remove();
   $('.youTried').remove();
+  $('.cat').css('marginLeft', '0');
   $('.main').prepend(highScore, currentScore);
   $('form').append(input).on('submit', doesMatch);
 }
@@ -129,7 +130,6 @@ function removeListItem() {
     });
   }
 }
-
 
 // decreasing interval and animation duration with progress
 function decreaseInterval() {
