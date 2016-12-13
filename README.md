@@ -1,5 +1,5 @@
 #GA WDI24 Project 1 - Typing Game
-For our first project at GA we were asked to create a game and deploy at Heroku. 
+For our first project at GA we were asked to create a game and deploy it at Heroku. 
 
 [DEMO](http://grumpy-typing.herokuapp.com/)
 
