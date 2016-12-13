@@ -13,13 +13,13 @@ body {
 
 .main {
   clear: both;
-  padding-top: 2em;
 }
 
 h1 {
   font-size: 3em;
   font-weight: 800;
   font-family: 'Abril Fatface', cursive;
+  text-decoration: underline;
 }
 
 h2 {
@@ -91,7 +91,7 @@ input {
   color: white;
   padding: 1em 2em;
   border: 10px;
-  font-size: .7em;
+  font-size: .8em;
   margin-top: .4em;
   text-align: center;
   width: 60%;
