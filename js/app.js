@@ -53,7 +53,7 @@ function parseBoard() {
   score             = 0;
   var currentScore  = '<h4 id="score">Score: 0</h4>';
   var highScore     = '<h4 id="highScore">High score: ' + parseHighScore(currentLevel) + '</h4>';
-  var input         = '<input type="text" value="" placeholder="type here" autofocus="autofocus">';
+  var input         = '<input type="text" value="" class="typehere" placeholder="type here" autofocus="autofocus">';
   for (var i = 0; i < 20; i++) {
     $('.board').append('<div class="word"></div>');
   }
@@ -63,6 +63,7 @@ function parseBoard() {
   $('.cat').css('marginLeft', '0');
   $('.main').prepend(highScore, currentScore);
   $('form').append(input).on('submit', doesMatch);
+  $('.typehere').focus();
 }
 
 // Generates a new word every x seconds
@@ -170,7 +171,6 @@ function gameOverScreen() {
   var normal      = '<button type="button" name="button" id="normal">Boring</button>';
   var extreme     = '<button type="button" name="button" id="extreme">Extreme</button>';
   var buttons     = '<div class="buttons">' + easy + normal + extreme + '</div>';
-
   $('.main').prepend(finalScore, buttons);
   if (score < 50) {
     $('.main').prepend(youTried);
