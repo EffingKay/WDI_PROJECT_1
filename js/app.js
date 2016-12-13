@@ -109,8 +109,10 @@ function doesMatch(e) {
     score++;
     $('#score').html('Score: ' + score);
     changeBackground();
+    playSound('correct');
   } else {
     $('input').val('');
+    playSound('error');
   }
   decreaseInterval();
   saveTheCat();
@@ -227,7 +229,23 @@ function saveTheCat() {
     $('.cat').animate({
       marginLeft: '+=105px'
     }, 2000);
+    playSound('cat');
   } else if (score >= 50) {
     gameOver();
   }
+}
+
+function playSound(event) {
+  var eventSource;
+  if (event === 'cat') {
+    eventSource = './sounds/meow.mp3';
+  } else if (event === 'correct') {
+    eventSource = './sounds/gong.mp3';
+  } else {
+    eventSource = './sounds/error.mp3';
+  }
+  var audio = new Audio;
+  $('body').append(audio);
+  audio.src = eventSource;
+  audio.play();
 }
