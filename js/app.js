@@ -217,7 +217,7 @@ function extremeLevel() {
 
 function changeBackground() {
   var randomColors = ['#FF1962', '#8EE0F2', '#F5BB00', '#18A346', '#2EC4B6', '#8EA604',
-                      '#B84256', '#68EDCC', '#F16146', '#F25959', '#8EA604', '#FF4E00',
+                      '#B84256', '#68EDCC', '#F16146', '#F25959', '#0EAD69', '#FF4E00',
                       '#FF3338', '#00ACAE', '#FFFF5D', '#0090C9', '#EC9F05', '#EE4266'];
   var randomNumber = Math.floor(Math.random() * (randomColors.length-1)) + 1;
   $('body').css('backgroundColor', randomColors[randomNumber]);
