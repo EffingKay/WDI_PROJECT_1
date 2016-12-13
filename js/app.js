@@ -71,7 +71,7 @@ setInterval(randomWord, interval);
 
 // Generates a random word and parse it to unordered list
 function randomWord() {
-  var randomWordNumber = Math.floor(Math.random() * (window.words.length -1 )) + 1;
+  var randomWordNumber = (Math.floor(Math.random() * (window.words.length -1 )) + 1);
   parseWord(window.words[randomWordNumber]);
 }
 
@@ -110,11 +110,11 @@ function doesMatch(e) {
     $('#score').html('Score: ' + score);
     changeBackground();
     playSound('correct');
-  } else {
+  } else if ( currentWord.indexOf(typed) === -1) {
     $('input').val('');
     playSound('error');
-    $('input').effect('highlight');
   }
+  $('input').effect('highlight');
   decreaseInterval();
   saveTheCat();
 }
