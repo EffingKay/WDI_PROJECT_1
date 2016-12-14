@@ -93,10 +93,10 @@ function doesMatch(e) {
     score++;
     $('#score').html('Score: ' + score);
     changeBackground();
+    $('input').effect('highlight');
   } else if ( currentWord.indexOf(typed) === -1) {
     $('input').val('');
   }
-  $('input').effect('highlight');
   decreaseInterval();
 }
 
